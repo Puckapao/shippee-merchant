@@ -27,25 +27,84 @@ import AddCirleIcon from '@material-ui/icons/AddCircle';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
+import Paper from '@material-ui/core/Paper';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Checkbox from '@material-ui/core/Checkbox';
+
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import ListItemText from '@material-ui/core/ListItemText';
+import CommentIcon from '@material-ui/icons/Comment';
+
 import SALogo from './images/sa-logo.png';
 import Item1 from './images/item-1.jpg';
 import Item2 from './images/item-2.jpg';
 
-const items = [
+const orders = [
 	{
-		id: 1,
-		name: "สินค้าที่ชื่อยาวที่สุดในโลกที่คุณไม่เคยเห็นมาก่อนแล้วคุณจะตกใจว่าทำไมมันยาวได้ขนาดนี้",
-		price: 499.49,
-		amount: 1,
-		image: Item1,
-	},
-	{
-		id: 2,
-		name: "Lorem Ipsum",
-		price: 299.50,
-		amount: 2,
-		image: Item2,
-	},
+		orderID: "0001",
+		status: "waiting",
+		name: "คุณขาว",
+		customerName: "",
+		address: "",
+		phone: "",
+		price: 1000,
+		shipping: "alpha",
+		receipt: "",
+		submitTime: "",
+		items: [
+			{
+				id: "1",
+				name: "Lorem Ipsum",
+				price: 250,
+				amount: 2,
+				image: Item2,
+			},{
+				id: 2,
+				name: "Something",
+				price: 450,
+				amount: 1,
+				image: Item2,
+			}
+
+		],
+	},{
+		orderID: "0002",
+		status: "ready",
+		name: "คุณแดง",
+		customerName: "แดง แด๊ง แดง",
+		address: "111 สุขุมวิท 55 คลองตันเหนือ วัฒนา กทม. 10110",
+		phone: "0888888888",
+		price: 300,
+		shipping: "EMS",
+		receipt: Item1,
+		submitTime: "15.45",
+		items: [
+			{
+				id: "1",
+				name: "Trouser",
+				price: 100,
+				amount: 2,
+				image: Item2,
+			},{
+				id: 2,
+				name: "T-Shirt",
+				price: 100,
+				amount: 1,
+				image: Item2,
+			},{
+				id: 3,
+				name: "Skirt",
+				price: 100,
+				amount: 1,
+				image: Item2,
+			}
+
+		],
+	}
 ];
 
 const styles = theme => ({
@@ -55,6 +114,18 @@ const styles = theme => ({
 	},
 	grow: {
 		flexGrow: 1,
+	},
+	paper: {
+		paddingTop: theme.spacing.unit * 2,
+		paddingBottom: theme.spacing.unit * 3,
+	},
+	card: {
+		minWidth: 275,
+		marginTop: theme.spacing.unit,
+	},
+	rowCheckbox: {
+		paddingTop: 0,
+		paddingLeft: 0,
 	},
 	menuButton: {
 		marginLeft: -12,
@@ -140,9 +211,9 @@ const styles = theme => ({
 
 function TabContainer(props) {
 	return (
-		<Typography component="div" variant="body1" style={{ padding: 24 }}>
+		<React.Fragment>
 			{props.children}
-		</Typography>
+		</React.Fragment>
 	)
 }
 
@@ -151,6 +222,7 @@ class App extends Component {
 		anchorEl: null,
 		mobileMoreAnchorEl: null,
 		value: 0,
+		checked: [],
 	};
 
 	handleStatusMenuOpen = event => {
@@ -173,6 +245,31 @@ class App extends Component {
 	handleChange = (event, value) => {
 		this.setState({ value });
 	};
+
+	handleToggle = value => () => {
+		const { checked } = this.state;
+		const currentIndex = checked.indexOf(value);
+		const newChecked = [...checked];
+
+		if(currentIndex === -1) {
+			newChecked.push(value);
+		} else {
+			newChecked.splice(currentIndex, 1);
+		};
+
+		this.setState({
+			checked: newChecked,
+		});
+	};
+
+	handleSelectAll = event => {
+		const { checked } = this.state;
+		if(event.target.checked) {
+			this.setState(state => ({ checked: orders.map(o => o.orderID )}));
+			return;
+		};
+		this.setState({ checked: [] });
+	}
 
 	componentDidMount() {
 	};
@@ -210,6 +307,24 @@ class App extends Component {
 					<p>เปลี่ยนสถานะ</p>
 				</MenuItem>
 			</Menu>
+		);
+
+		const table = (
+			<Paper className={classes.paper}>
+				<Checkbox
+					checked={this.state.checked.length === orders.length}
+					onChange={this.handleSelectAll}
+					/>
+				{orders.map(order => (
+							<Card className={classes.card} key={order.orderID}>
+								<Checkbox
+									onChange={this.handleToggle(order.orderID)}
+									checked={this.state.checked.indexOf(order.orderID) !== -1}
+									value={order.orderID}
+									/>
+							</Card>
+				))}
+			</Paper>
 		);
 
 		return (
@@ -284,7 +399,7 @@ class App extends Component {
 								<Tab label="สำเร็จ" />
 							</Tabs>
 						</div>
-						{value === 0 && <TabContainer>ทั้งหมด</TabContainer>}
+						{value === 0 && <TabContainer>{table}</TabContainer>}
 						{value === 1 && <TabContainer>ใบสั่งสินค้า</TabContainer>}
 						{value === 2 && <TabContainer>ตรวจสอบยอด</TabContainer>}
 						{value === 3 && <TabContainer>รอจัดส่ง</TabContainer>}
