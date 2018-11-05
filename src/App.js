@@ -32,12 +32,15 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import CommentIcon from '@material-ui/icons/Comment';
+
+import Modal from '@material-ui/core/Modal';
 
 import SALogo from './images/sa-logo.png';
 import Item1 from './images/item-1.jpg';
@@ -217,24 +220,376 @@ const originalOrders = [
 				image: Item2,
 			}
 		],
+	},{
+		orderID: "0004",
+		url: "https://shippee.com/5b715fcf03656e1cf0beaaa6/5b8b631c0f611d2acc29f55f",
+		status: "created",
+		paymentStatus: "waitForConfirmation",
+		name: "คุณม่วง",
+		customerName: "แดง แด๊ง แดง",
+		address: {
+			houseNo: "111",
+			road: "สุขุมวิท 55",
+			subDistrict: "คลองตันเหนือ",
+			district: "วัฒนา",
+			province: "กทม.",
+			postalCode: "10110",
+		},
+		additionalNote: "ถ้ากดกริ่งแล้วไม่มีคนออกมา ให้ฝากไว้ที่ป้อมยาม",
+		phone: "0888888888",
+		price: 500,
+		bankAccount: "KBANK",
+		shipping: "EMS",
+		trackingNo: "",
+		receipt: Item1,
+		createdTime: "291020181105",
+		updatedTime: "291020181545",
+		submitTime: "291020181545",
+		expiredAt: "061120181105",
+		items: [
+			{
+				id: "1",
+				name: "Trouser",
+				price: 100,
+				amount: 4,
+				image: Item2,
+			},{
+				id: 2,
+				name: "T-Shirt",
+				price: 100,
+				amount: 1,
+				image: Item2,
+			},{
+				id: 3,
+				name: "Skirt",
+				price: 100,
+				amount: 1,
+				image: Item2,
+			}
+
+		],
+	},{
+		orderID: "0005",
+		url: "https://shippee.com/5b715fcf03656e1cf0beaaa6/5b8b631c0f611d2acc29f55f",
+		status: "created",
+		paymentStatus: "waitForConfirmation",
+		name: "คุณเหลือง",
+		customerName: "แดง แด๊ง แดง",
+		address: {
+			houseNo: "111",
+			road: "สุขุมวิท 55",
+			subDistrict: "คลองตันเหนือ",
+			district: "วัฒนา",
+			province: "กทม.",
+			postalCode: "10110",
+		},
+		additionalNote: "ถ้ากดกริ่งแล้วไม่มีคนออกมา ให้ฝากไว้ที่ป้อมยาม",
+		phone: "0888888888",
+		price: 300,
+		bankAccount: "KBANK",
+		shipping: "EMS",
+		trackingNo: "",
+		receipt: Item1,
+		createdTime: "291020181105",
+		updatedTime: "291020181545",
+		submitTime: "291020181545",
+		expiredAt: "061120181105",
+		items: [
+			{
+				id: "1",
+				name: "Trouser",
+				price: 100,
+				amount: 2,
+				image: Item2,
+			},{
+				id: 2,
+				name: "T-Shirt",
+				price: 100,
+				amount: 1,
+				image: Item2,
+			},{
+				id: 3,
+				name: "Skirt",
+				price: 100,
+				amount: 1,
+				image: Item2,
+			}
+
+		],
+	},{
+		orderID: "0006",
+		url: "https://shippee.com/5b715fcf03656e1cf0beaaa6/5b8b631c0f611d2acc29f55f",
+		status: "created",
+		paymentStatus: "waitForConfirmation",
+		name: "คุณฟ้า",
+		customerName: "แดง แด๊ง แดง",
+		address: {
+			houseNo: "111",
+			road: "สุขุมวิท 55",
+			subDistrict: "คลองตันเหนือ",
+			district: "วัฒนา",
+			province: "กทม.",
+			postalCode: "10110",
+		},
+		additionalNote: "ถ้ากดกริ่งแล้วไม่มีคนออกมา ให้ฝากไว้ที่ป้อมยาม",
+		phone: "0888888888",
+		price: 300,
+		bankAccount: "KBANK",
+		shipping: "EMS",
+		trackingNo: "",
+		receipt: Item1,
+		createdTime: "291020181105",
+		updatedTime: "291020181545",
+		submitTime: "291020181545",
+		expiredAt: "061120181105",
+		items: [
+			{
+				id: "1",
+				name: "Trouser",
+				price: 100,
+				amount: 2,
+				image: Item2,
+			},{
+				id: 2,
+				name: "T-Shirt",
+				price: 100,
+				amount: 1,
+				image: Item2,
+			},{
+				id: 3,
+				name: "Skirt",
+				price: 100,
+				amount: 1,
+				image: Item2,
+			}
+
+		],
+	},{
+		orderID: "0007",
+		url: "https://shippee.com/5b715fcf03656e1cf0beaaa6/5b8b631c0f611d2acc29f55f",
+		status: "created",
+		paymentStatus: "waitForConfirmation",
+		name: "คุณน้ำเงิน",
+		customerName: "แดง แด๊ง แดง",
+		address: {
+			houseNo: "111",
+			road: "สุขุมวิท 55",
+			subDistrict: "คลองตันเหนือ",
+			district: "วัฒนา",
+			province: "กทม.",
+			postalCode: "10110",
+		},
+		additionalNote: "ถ้ากดกริ่งแล้วไม่มีคนออกมา ให้ฝากไว้ที่ป้อมยาม",
+		phone: "0888888888",
+		price: 300,
+		bankAccount: "KBANK",
+		shipping: "EMS",
+		trackingNo: "",
+		receipt: Item1,
+		createdTime: "291020181105",
+		updatedTime: "291020181545",
+		submitTime: "291020181545",
+		expiredAt: "061120181105",
+		items: [
+			{
+				id: "1",
+				name: "Trouser",
+				price: 100,
+				amount: 2,
+				image: Item2,
+			},{
+				id: 2,
+				name: "T-Shirt",
+				price: 100,
+				amount: 1,
+				image: Item2,
+			},{
+				id: 3,
+				name: "Skirt",
+				price: 100,
+				amount: 1,
+				image: Item2,
+			}
+
+		],
+	},{
+		orderID: "0008",
+		url: "https://shippee.com/5b715fcf03656e1cf0beaaa6/5b8b631c0f611d2acc29f55f",
+		status: "created",
+		paymentStatus: "waitForConfirmation",
+		name: "คุณเงิน",
+		customerName: "แดง แด๊ง แดง",
+		address: {
+			houseNo: "111",
+			road: "สุขุมวิท 55",
+			subDistrict: "คลองตันเหนือ",
+			district: "วัฒนา",
+			province: "กทม.",
+			postalCode: "10110",
+		},
+		additionalNote: "ถ้ากดกริ่งแล้วไม่มีคนออกมา ให้ฝากไว้ที่ป้อมยาม",
+		phone: "0888888888",
+		price: 300,
+		bankAccount: "KBANK",
+		shipping: "EMS",
+		trackingNo: "",
+		receipt: Item1,
+		createdTime: "291020181105",
+		updatedTime: "291020181545",
+		submitTime: "291020181545",
+		expiredAt: "061120181105",
+		items: [
+			{
+				id: "1",
+				name: "Trouser",
+				price: 100,
+				amount: 2,
+				image: Item2,
+			},{
+				id: 2,
+				name: "T-Shirt",
+				price: 100,
+				amount: 1,
+				image: Item2,
+			},{
+				id: 3,
+				name: "Skirt",
+				price: 100,
+				amount: 1,
+				image: Item2,
+			}
+
+		],
+	},{
+		orderID: "0009",
+		url: "https://shippee.com/5b715fcf03656e1cf0beaaa6/5b8b631c0f611d2acc29f55f",
+		status: "created",
+		paymentStatus: "waitForConfirmation",
+		name: "คุณทอง",
+		customerName: "แดง แด๊ง แดง",
+		address: {
+			houseNo: "111",
+			road: "สุขุมวิท 55",
+			subDistrict: "คลองตันเหนือ",
+			district: "วัฒนา",
+			province: "กทม.",
+			postalCode: "10110",
+		},
+		additionalNote: "ถ้ากดกริ่งแล้วไม่มีคนออกมา ให้ฝากไว้ที่ป้อมยาม",
+		phone: "0888888888",
+		price: 300,
+		bankAccount: "KBANK",
+		shipping: "EMS",
+		trackingNo: "",
+		receipt: Item1,
+		createdTime: "291020181105",
+		updatedTime: "291020181545",
+		submitTime: "291020181545",
+		expiredAt: "061120181105",
+		items: [
+			{
+				id: "1",
+				name: "Trouser",
+				price: 100,
+				amount: 2,
+				image: Item2,
+			},{
+				id: 2,
+				name: "T-Shirt",
+				price: 100,
+				amount: 1,
+				image: Item2,
+			},{
+				id: 3,
+				name: "Skirt",
+				price: 100,
+				amount: 1,
+				image: Item2,
+			}
+
+		],
+	},{
+		orderID: "0010",
+		url: "https://shippee.com/5b715fcf03656e1cf0beaaa6/5b8b631c0f611d2acc29f55f",
+		status: "created",
+		paymentStatus: "waitForConfirmation",
+		name: "คุณส้ม",
+		customerName: "แดง แด๊ง แดง",
+		address: {
+			houseNo: "111",
+			road: "สุขุมวิท 55",
+			subDistrict: "คลองตันเหนือ",
+			district: "วัฒนา",
+			province: "กทม.",
+			postalCode: "10110",
+		},
+		additionalNote: "ถ้ากดกริ่งแล้วไม่มีคนออกมา ให้ฝากไว้ที่ป้อมยาม",
+		phone: "0888888888",
+		price: 300,
+		bankAccount: "KBANK",
+		shipping: "EMS",
+		trackingNo: "",
+		receipt: Item1,
+		createdTime: "291020181105",
+		updatedTime: "291020181545",
+		submitTime: "291020181545",
+		expiredAt: "061120181105",
+		items: [
+			{
+				id: "1",
+				name: "Trouser",
+				price: 100,
+				amount: 2,
+				image: Item2,
+			},{
+				id: 2,
+				name: "T-Shirt",
+				price: 100,
+				amount: 1,
+				image: Item2,
+			},{
+				id: 3,
+				name: "Skirt",
+				price: 100,
+				amount: 1,
+				image: Item2,
+			}
+
+		],
 	}
 ];
 
 const styles = theme => ({
 	layout: {
-		width: '100%',
-		marginBottom: theme.spacing.unit * 6,
+		height: '100vh',
+		display: 'flex',
+		flexDirection: 'column',
+	},
+	header: {
+		backgroundColor: theme.palette.primary[100],
+	},
+	footer: {
+		backgroundColor: theme.palette.primary[200],
+	},
+	content: {
+		flex: 1,
+		overflow: 'auto',
+		background: '#f5f5f5',
+		padding: theme.spacing.unit * 2,
 	},
 	grow: {
 		flexGrow: 1,
 	},
-	paper: {
-		paddingTop: theme.spacing.unit * 2,
-		paddingBottom: theme.spacing.unit * 3,
+	selectAllPaper: {
+	},
+	cardSection: {
+		backgroundColor: "#999999",
+		padding: theme.spacing.unit,
+		height: '100%',
 	},
 	card: {
 		minWidth: 275,
-		marginTop: theme.spacing.unit,
+		marginBottom: theme.spacing.unit,
 		display: 'flex',
 		alignItems: 'flex-start',
 	},
@@ -269,6 +624,9 @@ const styles = theme => ({
 	},
 	checkbox: {
 		paddingRight: 0,
+	},
+	formLabel: {
+		paddingLeft: theme.spacing.unit * 2,
 	},
 	lastItem: {
 		marginRight: 0,
@@ -337,24 +695,42 @@ const styles = theme => ({
 	},
 	created: {
 		backgroundColor: '#555',
+		'&:hover': {
+			backgroundColor: fade('#555555', 0.55),
+		},
 	},
 	submitted: {
-		backgroundColor: 'red'
+		backgroundColor: 'red',
+		'&:hover': {
+			backgroundColor: fade('#ff0000', 0.55),
+		},
 	},
 	shipped: {
 		backgroundColor: 'green',
+		'&:hover': {
+			backgroundColor: fade('#00ff00', 0.55),
+		},
 	},
 	success: {
 		backgroundColor: 'grey',
+		'&:hover': {
+			backgroundColor: fade('#999999', 0.55),
+		},
 	},
 	pending: {
 		display: 'none',
 	},
 	wait: {
 		backgroundColor: 'blue',
+		'&:hover': {
+			backgroundColor: fade('#0000ff', 0.55),
+		},
 	},
 	confirmed: {
 		backgroundColor: 'green',
+		'&:hover': {
+			backgroundColor: fade('#00ff00', 0.55),
+		},
 	},
 	paymentButton: {
 		marginLeft: theme.spacing.unit,
@@ -380,6 +756,19 @@ const styles = theme => ({
 		display: 'flex',
 		alignItems: 'center',
 	},
+	orderPopup: {
+		position: 'absolute',
+		width: '70%',
+		boxShadow: theme.shadows[5],
+		padding: theme.spacing.unit * 4,
+		top: '50%',
+		left: '50%',
+		transform: 'translate(-50%, -50%)',
+		'&:focus': {
+			outline: 'none',
+		},
+		textAlign: 'center',
+	},
 })
 
 function TabContainer(props) {
@@ -398,6 +787,7 @@ class App extends Component {
 		checked: [],
 		orders: originalOrders,
 		filteredOrders: [],
+		orderPopup: false,
 	};
 
 	handleStatusMenuOpen = event => {
@@ -427,21 +817,25 @@ class App extends Component {
 
 	async handleStatusChange(id) {
 		const { checked, orders, value } = this.state;
-		const targetStatus = orderStatus.filter(status => status.id === id);
-		for( let i = 0; i < checked.length; i++ ) {
-			await this.setState({
-				orders: this.state.orders.map(order => {
-					if(order.orderID === checked[i]){
-						return Object.assign({}, order, { status: targetStatus[0].name.en });
-					} else {
-						return order;
-					}
-				}),
-			}, () => {
-				//this.filterOrders(this.state.value);
-			});
-		}
-		this.handleChange(null, this.state.value);
+		if(checked.length !== 0) {
+			const targetStatus = orderStatus.filter(status => status.id === id);
+			for( let i = 0; i < checked.length; i++ ) {
+				await this.setState({
+					orders: this.state.orders.map(order => {
+						if(order.orderID === checked[i]){
+							return Object.assign({}, order, { status: targetStatus[0].name.en });
+						} else {
+							return order;
+						}
+					}),
+				}, () => {
+					//this.filterOrders(this.state.value);
+				});
+			}
+			this.handleChange(null, this.state.value);
+		} else {
+			this.handleMenuClose();
+		};
 	};
 
 	handleToggle = value => () => {
@@ -474,6 +868,14 @@ class App extends Component {
 		const newOrder = orders.filter(order => order.status === orderStatus[statusIndex].name.en);
 		this.setState({ filteredOrders: newOrder });
 	};
+
+	handleOrderPopupOpen = () => {
+		this.setState({ orderPopup: true });
+	}
+
+	handleOrderPopupClose = () => {
+		this.setState({ orderPopup: false });
+	}
 
 	componentDidMount() {
 		this.filterOrders(this.state.value);
@@ -540,68 +942,57 @@ class App extends Component {
 				onClose={this.handleMenuClose}
 				>
 				{orderStatus.map( status => (
-					<MenuItem onClick={this.handleStatusChange.bind(this, status.id)} key={status.id}>{status.name.en}</MenuItem>
+					<MenuItem onClick={this.handleStatusChange.bind(this, status.id)} key={status.id}>{status.name.th}</MenuItem>
 				))}
 			</Menu>
 		);
 
-		const renderMobileMenu = (
-			<Menu
-				anchorEl={mobileMoreAnchorEl}
-				anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-				transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-				open={isMobileMenuOpen}
-				onClose={this.handleMobileMenuClose}
-				>
-				<MenuItem onClick={this.handleStatusMenuOpen}>
-					<CreateIcon className={classes.menuIcon} />
-					<p>เปลี่ยนสถานะ</p>
-				</MenuItem>
-			</Menu>
-		);
+		// const renderMobileMenu = (
+		// 	<Menu
+		// 		anchorEl={mobileMoreAnchorEl}
+		// 		anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+		// 		transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+		// 		open={isMobileMenuOpen}
+		// 		onClose={this.handleMobileMenuClose}
+		// 		>
+		// 		<MenuItem onClick={this.handleStatusMenuOpen}>
+		// 			<CreateIcon className={classes.menuIcon} />
+		// 			<p>เปลี่ยนสถานะ</p>
+		// 		</MenuItem>
+		// 	</Menu>
+		// );
 
 		const table = (
-			<Paper className={classes.paper}>
-				{filteredOrders.length === 0 ?
-					<div>Nothing here</div>
-					:
-					<div className={classes.selectAll}>
-						<Checkbox
-							checked={this.state.checked.length === filteredOrders.length}
-							onChange={this.handleSelectAll}
-							className={classes.checkbox}
-							/>
-					</div>
-				}
-				{filteredOrders.map(order => (
-					<Card className={classes.card} key={order.orderID}>
-						<Checkbox
-							onChange={this.handleToggle(order.orderID)}
-							checked={this.state.checked.indexOf(order.orderID) !== -1}
-							value={order.orderID}
-							className={classes.checkbox}
-							/>
-						<CardContent className={classes.cardContent}>
-							<Button variant="contained" color="primary" className={classNames(statusColor(order.status), classes.statusButton)}>
-								{statusText(order.status)}
-							</Button>
-							<Button variant="contained" color="primary" className={classNames(paymentColor(order.status, order.paymentStatus), classes.statusButton, classes.paymentButton)}>
-								{paymentText(order.paymentStatus)}
-							</Button>
-							<div className={classes.receiptDetailLess}>
-								<Typography variant="body2">{order.name}</Typography>
-								<Typography variant="body1" className={classes.textRight}>{order.price} บาท</Typography>
-							</div>
-						</CardContent>
-					</Card>
-				))}
-			</Paper>
+			<React.Fragment>
+					{filteredOrders.map(order => (
+						<Card className={classes.card} key={order.orderID}>
+							<Checkbox
+								onChange={this.handleToggle(order.orderID)}
+								checked={this.state.checked.indexOf(order.orderID) !== -1}
+								value={order.orderID}
+								className={classes.checkbox}
+								/>
+							<CardContent className={classes.cardContent}>
+								<Button variant="contained" color="primary" className={classNames(statusColor(order.status), classes.statusButton)}>
+									{statusText(order.status)}
+								</Button>
+								<Button variant="contained" color="primary" className={classNames(paymentColor(order.status, order.paymentStatus), classes.statusButton, classes.paymentButton)}>
+									{paymentText(order.paymentStatus)}
+								</Button>
+								<div className={classes.receiptDetailLess}>
+									<Typography variant="body2">{order.name}</Typography>
+									<Typography variant="body1" className={classes.textRight}>{order.price} บาท</Typography>
+								</div>
+							</CardContent>
+						</Card>
+					))}
+			</React.Fragment>
 		);
 
 		return (
 			<React.Fragment>
 				<main className={classes.layout}>
-					<AppBar position="static" color="secondary">
+					<AppBar position="relative" color="secondary" className={classes.header}>
 						<Toolbar>
 							<IconButton className={classes.menuButton} color="inherit" aria-label="Open drawer">
 								<Avatar
@@ -613,69 +1004,109 @@ class App extends Component {
 							<Typography className={classes.title} variant="body2" color="inherit" noWrap>
 								Shippee Shop Name
 							</Typography>
-							<div className={classes.search}>
+							{/*
+								<div className={classes.search}>
 								<div className={classes.searchIcon}>
-									<SearchIcon />
+								<SearchIcon />
 								</div>
 								<InputBase
-									placeholder="ค้นหาบิล..."
-									classes={{
-										root: classes.inputRoot,
-										input: classes.inputInput,
-									}}
-									/>
+								placeholder="ค้นหาบิล..."
+								classes={{
+								root: classes.inputRoot,
+								input: classes.inputInput,
+								}}
+								/>
+								</div>
+								*/}
+								<div className={classes.grow} />
+								<div className={classes.sectionDesktop}>
+									<Button
+										aria-owns={isMenuOpen ? 'material-appbar' : null}
+										aria-haspopup="true"
+										onClick={this.handleStatusMenuOpen}
+										color="inherit"
+										className={classes.appBarButton}
+										>
+										<CreateIcon className={classes.menuIcon} />
+										<Typography className={classes.title} variant="body1" color="inherit" noWrap>เปลี่ยนสถานะ</Typography>
+									</Button>
+									<Button
+										aria-haspopup="true"
+										color="inherit"
+										className={classNames(classes.appBarButton, classes.lastItem)}
+										>
+										<AddCirleIcon className={classes.menuIcon} />
+										<Typography className={classes.title} variant="body1" color="inherit" noWrap>เปลี่ยนสถานะ</Typography>
+									</Button>
+								</div>
+								<div className={classes.sectionMobile}>
+									<IconButton aria-haspopup="true" onClick={this.handleStatusMenuOpen} color="inherit">
+										<CreateIcon />
+									</IconButton>
+									<IconButton aria-haspopup="true" onClick={this.handleOrderPopupOpen} color="inherit">
+										<AddCirleIcon />
+									</IconButton>
+								</div>
+							</Toolbar>
+						</AppBar>
+						<div className={classNames(classes.sectionMobile, classes.flexColumn)}>
+							<div className={classes.tabBar}>
+								<Tabs value={value} onChange={this.handleChange} fullWidth>
+									{orderStatus.map(status => (
+										<Tab key={status.id} label={status.name.th} />
+									))}
+								</Tabs>
 							</div>
-							<div className={classes.grow} />
-							<div className={classes.sectionDesktop}>
-								<Button
-									aria-owns={isMenuOpen ? 'material-appbar' : null}
-									aria-haspopup="true"
-									onClick={this.handleStatusMenuOpen}
-									color="inherit"
-									className={classes.appBarButton}
-									>
-									<CreateIcon className={classes.menuIcon} />
-									<Typography className={classes.title} variant="body1" color="inherit" noWrap>เปลี่ยนสถานะ</Typography>
-								</Button>
-								<Button
-									aria-haspopup="true"
-									color="inherit"
-									className={classNames(classes.appBarButton, classes.lastItem)}
-									>
-									<AddCirleIcon className={classes.menuIcon} />
-									<Typography className={classes.title} variant="body1" color="inherit" noWrap>เปลี่ยนสถานะ</Typography>
-								</Button>
-							</div>
-							<div className={classes.sectionMobile}>
-								<IconButton aria-haspopup="true" onClick={this.handleStatusMenuOpen} color="inherit">
-									<CreateIcon />
-								</IconButton>
-								<IconButton aria-haspopup="true" color="inherit">
-									<AddCirleIcon />
-								</IconButton>
-							</div>
-						</Toolbar>
-					</AppBar>
-					{renderMenu}
-					{renderMobileMenu}
-
-					<div className={classNames(classes.sectionMobile, classes.flexColumn)}>
-						<div className={classes.tabBar}>
-							<Tabs value={value} onChange={this.handleChange} fullWidth>
-								{orderStatus.map(status => (
-									<Tab key={status.id} label={status.name.th} />
-								))}
-							</Tabs>
 						</div>
-						{value === 0 && <TabContainer>{table}</TabContainer>}
-						{value === 1 && <TabContainer>{table}</TabContainer>}
-						{value === 2 && <TabContainer>{table}</TabContainer>}
-						{value === 3 && <TabContainer>{table}</TabContainer>}
-					</div>
-				</main>
-			</React.Fragment>
-		);
-	}
-}
+						<Paper className={classes.selectAllPaper}>
+							{filteredOrders.length === 0 ?
+								<div>Nothing here</div>
+								:
+								<div className={classes.selectAll}>
+									<FormControlLabel
+										control={
+											<Checkbox
+												checked={this.state.checked.length === filteredOrders.length}
+												onChange={this.handleSelectAll}
+											/>
+										}
+										label={this.state.checked.length === 0 ? "เลือกทั้งหมด" : `เลือก ${this.state.checked.length}`}
+										className={classes.formLabel}
+									/>
+								</div>
+							}
+						</Paper>
+						{renderMenu}
+						{/*renderMobileMenu*/}
+						<div className={classes.content}>
 
-export default withStyles(styles)(App);
+							{value === 0 && <TabContainer>{table}</TabContainer>}
+							{value === 1 && <TabContainer>{table}</TabContainer>}
+							{value === 2 && <TabContainer>{table}</TabContainer>}
+							{value === 3 && <TabContainer>{table}</TabContainer>}
+
+							<div className={classNames(classes.sectionMobile,classes.addProduct)}>
+								<Modal
+									aria-labelledby="modal-title"
+									aria-describedby="modal-description"
+									open={this.state.orderPopup}
+									onClose={this.handleOrderPopupClose}
+									>
+									<Paper className={classes.orderPopup}>
+										<Typography variant="body1">
+											Test
+										</Typography>
+									</Paper>
+								</Modal>
+							</div>
+
+						</div>
+
+						<div className={classes.footer}>Footer</div>
+					</main>
+				</React.Fragment>
+			);
+		}
+	}
+
+	export default withStyles(styles)(App);
