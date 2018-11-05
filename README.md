@@ -1,5 +1,5 @@
-<p align="center">
-	# SHIPPEE MERCHANT PAGE
-	
+# SHIPPEE MERCHANT PAGE
+
+<p align="center">	
 	CURRENTLY UNDER DEVELOPMENT
 </p>
