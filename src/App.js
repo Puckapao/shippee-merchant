@@ -237,7 +237,7 @@ const originalOrders = [
 		},
 		additionalNote: "ถ้ากดกริ่งแล้วไม่มีคนออกมา ให้ฝากไว้ที่ป้อมยาม",
 		phone: "0888888888",
-		price: 500,
+		price: 300,
 		bankAccount: "KBANK",
 		shipping: "EMS",
 		trackingNo: "",
@@ -251,7 +251,7 @@ const originalOrders = [
 				id: "1",
 				name: "Trouser",
 				price: 100,
-				amount: 4,
+				amount: 2,
 				image: Item2,
 			},{
 				id: 2,
