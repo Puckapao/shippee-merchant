@@ -1,7 +1,3 @@
-#### SHIPPEE MERCHANT PAGE
+# SHIPPEE MERCHANT PAGE
 
-## Table of Contents
-
-- Nothing
-
-#### CURRENTLY UNDER DEVELOPMENT
+<div style="text-align: center;">CURRENTLY UNDER DEVELOPMENT</div>
