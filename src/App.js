@@ -22,7 +22,8 @@ import ReceiptIcon from '@material-ui/icons/Receipt';
 import CreateIcon from '@material-ui/icons/Create';
 import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar';
-import AddCirleIcon from '@material-ui/icons/AddCircle';
+import AddIcon from '@material-ui/icons/Add';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -41,6 +42,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import CommentIcon from '@material-ui/icons/Comment';
 
 import Modal from '@material-ui/core/Modal';
+import TextField from '@material-ui/core/TextField';
+import MenuList from '@material-ui/core/MenuList';
 
 import SALogo from './images/sa-logo.png';
 import Item1 from './images/item-1.jpg';
@@ -559,6 +562,59 @@ const originalOrders = [
 	}
 ];
 
+const customerNames = [
+	{
+		id: "00001",
+		lastUsed: "201811050525",
+		name: "คุณขาว",
+	},
+	{
+		id: "00002",
+		lastUsed: "201811050847",
+		name: "คุณแดง",
+	},
+	{
+		id: "00003",
+		lastUsed: "201811051122",
+		name: "คุณดำ",
+	},
+	{
+		id: "00004",
+		lastUsed: "201811050247",
+		name: "คุณม่วง",
+	},
+	{
+		id: "00005",
+		lastUsed: "201811052244",
+		name: "คุณเหลือง",
+	},
+	{
+		id: "00006",
+		lastUsed: "201811051807",
+		name: "คุณฟ้า",
+	},
+	{
+		id: "00007",
+		lastUsed: "201811050659",
+		name: "คุณน้ำเงิน",
+	},
+	{
+		id: "00008",
+		lastUsed: "201811051535",
+		name: "คุณเงิน",
+	},
+	{
+		id: "00009",
+		lastUsed: "201811051755",
+		name: "คุณทอง",
+	},
+	{
+		id: "00010",
+		lastUsed: "201811051200",
+		name: "คุณส้ม",
+	},
+]
+
 const styles = theme => ({
 	layout: {
 		height: '100vh',
@@ -615,6 +671,10 @@ const styles = theme => ({
 		padding: '0 12px',
 		marginRight: theme.spacing.unit * 2,
 	},
+	orderPopupButton: {
+		padding: '0 12px',
+		marginTop: theme.spacing.unit * 2,
+	},
 	statusButton: {
 		fontSize: '0.675rem',
 		fontWeight: '300',
@@ -636,6 +696,12 @@ const styles = theme => ({
 		[theme.breakpoints.up('sm')]: {
 			display: 'block',
 		},
+	},
+	titleMarginBottom: {
+		marginBottom: theme.spacing.unit,
+	},
+	titleMarginTop: {
+		marginTop: theme.spacing.unit * 2,
 	},
 	search: {
 		position: 'relative',
@@ -769,7 +835,32 @@ const styles = theme => ({
 		},
 		textAlign: 'center',
 	},
+	textField: {
+	},
+	menuItem: {
+		'&:focus': {
+			backgroundColor: theme.palette.secondary[300],
+			'& $primary, & $icon': {
+				color: theme.palette.common.white,
+			},
+		},
+	},
+	primary: {},
+	icon: {},
+	prevCustomerPaper: {
+		height: '30vh',
+		overflow: 'scroll',
+	},
+	blankOrder: {
+		marginTop: theme.spacing.unit * 2,
+		marginBottom: theme.spacing.unit * 2,
+	},
+	addProductButton: {
+		marginTop: theme.spacing.unit * 2,
+	},
 })
+
+const orderSteps = ["กรุณากรอกชื่อลูกค้า", "รถเข็น", "สรุปข้อมูล"];
 
 function TabContainer(props) {
 	return (
@@ -788,7 +879,93 @@ class App extends Component {
 		orders: originalOrders,
 		filteredOrders: [],
 		orderPopup: false,
+		customerNames: [],
+		newCustomerName: "",
+		activeOrderStep: 0,
+		cart: [],
+		products: [],
+		newProduct: {},
+
 	};
+
+	getOrderStepContent = (step) => {
+		switch(step){
+			case 0:
+				return (
+					<React.Fragment>
+						<TextField
+							required
+							id="customer-name-field"
+							label="ชื่อลูกค้า"
+							value={this.state.newCustomerName}
+							className={this.props.classes.textField}
+							margin="normal"
+							variant="outlined"
+							onChange={this.handleNewName}
+							fullWidth
+							/>
+						<Typography variant="body2" className={classNames(this.props.classes.titleMarginBottom, this.props.classes.titleMarginTop)}>
+							ลูกค้าเดิม
+						</Typography>
+						<Paper className={this.props.classes.prevCustomerPaper}>
+							<MenuList>
+								{customerNames.map(customer => (
+									<MenuItem className={this.props.classes.menuItem} key={customer.id} onClick={this.handlePrevName.bind(this, customer.name)}>
+										<ListItemText classes={{ primary: this.props.classes.primary }} primary={customer.name} />
+									</MenuItem>
+								))}
+							</MenuList>
+						</Paper>
+						{this.state.newCustomerName === "" ?
+							<Button variant="contained" color="secondary" className={classNames(this.props.classes.orderPopupButton)} disabled fullWidth>
+								ต่อไป
+							</Button>
+							:
+							<Button variant="contained" color="secondary" className={classNames(this.props.classes.orderPopupButton)} fullWidth onClick={this.handleNextStep}>
+								ต่อไป
+							</Button>
+						}
+					</React.Fragment>
+				)
+			case 1:
+				return (
+					<React.Fragment>
+						<Button variant="fab" mini color="secondary" aria-label="Add" className={this.props.classes.addProductButton}>
+				        	<AddIcon />
+				        </Button>
+						<Typography variant="body2" className={classNames(this.props.classes.titleMarginBottom)}>
+							เพิ่มสินค้า
+						</Typography>
+						{this.state.cart.length === 0 ?
+							<Button variant="contained" color="secondary" className={classNames(this.props.classes.orderPopupButton)} disabled fullWidth>
+								ต่อไป
+							</Button>
+							:
+							<Button variant="contained" color="secondary" className={classNames(this.props.classes.orderPopupButton)} fullWidth onClick={this.handleNextStep}>
+								ต่อไป
+							</Button>
+						}
+					</React.Fragment>
+				)
+			case 2:
+				return (
+					<React.Fragment>
+						<div>step 3</div>
+						<Button variant="contained" color="secondary" className={classNames(this.props.classes.orderPopupButton)} fullWidth onClick={this.handleNextStep}>
+							ต่อไป
+						</Button>
+					</React.Fragment>
+				)
+			default:
+				return (
+					<React.Fragment>
+						<Typography variant="body2">
+							ระบบขัดข้อง กรุณาลองใหม่อีกครั้ง
+						</Typography>
+					</React.Fragment>
+				)
+		}
+	}
 
 	handleStatusMenuOpen = event => {
 		this.setState({ anchorEl: event.currentTarget });
@@ -874,7 +1051,24 @@ class App extends Component {
 	}
 
 	handleOrderPopupClose = () => {
-		this.setState({ orderPopup: false });
+		this.setState({
+			orderPopup: false,
+			/*activeOrderStep: 0,*/
+		});
+	}
+
+	handleNewName = event => {
+		this.setState({ newCustomerName: event.target.value });
+	}
+
+	handlePrevName = name => {
+		this.setState({ newCustomerName: name });
+	}
+
+	handleNextStep = () => {
+		let { activeOrderStep } = this.state;
+		activeOrderStep += 1;
+		this.setState({ activeOrderStep });
 	}
 
 	componentDidMount() {
@@ -883,7 +1077,7 @@ class App extends Component {
 
 	render() {
 		const { classes } = this.props;
-		const { anchorEl, mobileMoreAnchorEl, value, orders, filteredOrders } = this.state;
+		const { anchorEl, mobileMoreAnchorEl, value, orders, filteredOrders, newCustomerName, activeOrderStep } = this.state;
 		const isMenuOpen = Boolean(anchorEl);
 		const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -1035,8 +1229,8 @@ class App extends Component {
 										color="inherit"
 										className={classNames(classes.appBarButton, classes.lastItem)}
 										>
-										<AddCirleIcon className={classes.menuIcon} />
-										<Typography className={classes.title} variant="body1" color="inherit" noWrap>เปลี่ยนสถานะ</Typography>
+										<AddCircleIcon className={classes.menuIcon} />
+										<Typography className={classes.title} variant="body1" color="inherit" noWrap>เพิ่มออเดอร์</Typography>
 									</Button>
 								</div>
 								<div className={classes.sectionMobile}>
@@ -1044,7 +1238,7 @@ class App extends Component {
 										<CreateIcon />
 									</IconButton>
 									<IconButton aria-haspopup="true" onClick={this.handleOrderPopupOpen} color="inherit">
-										<AddCirleIcon />
+										<AddCircleIcon />
 									</IconButton>
 								</div>
 							</Toolbar>
@@ -1058,9 +1252,11 @@ class App extends Component {
 								</Tabs>
 							</div>
 						</div>
-						<Paper className={classes.selectAllPaper}>
+						<Paper className={classNames(classes.selectAllPaper,classes.sectionMobile, classes.flexColumn)}>
 							{filteredOrders.length === 0 ?
-								<div>Nothing here</div>
+								<Typography variant="body2" className={classes.titleMarginBottom} align="center" className={classes.blankOrder}>
+									ไม่มีออเดอร์
+								</Typography>
 								:
 								<div className={classes.selectAll}>
 									<FormControlLabel
@@ -1079,11 +1275,12 @@ class App extends Component {
 						{renderMenu}
 						{/*renderMobileMenu*/}
 						<div className={classes.content}>
-
-							{value === 0 && <TabContainer>{table}</TabContainer>}
-							{value === 1 && <TabContainer>{table}</TabContainer>}
-							{value === 2 && <TabContainer>{table}</TabContainer>}
-							{value === 3 && <TabContainer>{table}</TabContainer>}
+							<div className={classNames(classes.sectionMobile, classes.flexColumn)}>
+								{value === 0 && <TabContainer>{table}</TabContainer>}
+								{value === 1 && <TabContainer>{table}</TabContainer>}
+								{value === 2 && <TabContainer>{table}</TabContainer>}
+								{value === 3 && <TabContainer>{table}</TabContainer>}
+							</div>
 
 							<div className={classNames(classes.sectionMobile,classes.addProduct)}>
 								<Modal
@@ -1093,9 +1290,12 @@ class App extends Component {
 									onClose={this.handleOrderPopupClose}
 									>
 									<Paper className={classes.orderPopup}>
-										<Typography variant="body1">
-											Test
-										</Typography>
+										{activeOrderStep < orderSteps.length &&
+											<Typography variant="title" className={classes.titleMarginBottom}>
+												{orderSteps[activeOrderStep]}
+											</Typography>
+										}
+										{this.getOrderStepContent(activeOrderStep)}
 									</Paper>
 								</Modal>
 							</div>
